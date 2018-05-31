@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import sys, pygame
+import sys
 
 from jsonparser import JsonParser
 from palette import Palette
@@ -10,18 +10,20 @@ from figures.polygon import Polygon
 from figures.rectangle import Rectangle
 from figures.square import Square
 from figures.circle import Circle
+from pygamecanvas import PyGameCanvas
 
 
 def validate_command_line_args(parsed_args):
     how_many_args = len(parsed_args)
 
-    if (how_many_args != 2) and (how_many_args != 3):
+    if (how_many_args != 2) and (how_many_args != 4):
         print("Podano nieprawidłową liczbę argumentów.")
         return False
 
-    elif how_many_args == 3:
-        if (parsed_args[1] != "-o") and (parsed_args[1] != "--output"):
-            print("Flaga -o (lub --output) musi być pierwszym argumentem wywołania, jeśli jest podawana.")
+    elif how_many_args == 4:
+        if (parsed_args[2] != "-o") and (parsed_args[2] != "--output"):
+            print("Argumenty muszą zostać podane w następującej kolejności:\n "
+                  "plik.json -o (lub --output) plik_do_zapisu")
             return False
 
     return True
@@ -50,13 +52,13 @@ def main():
     if not validate_command_line_args(args):
         return
 
-    generate_png = False
-
+    json_file_name = args[1]
     if len(args) == 2:
-        json_file_name = args[1]
+        generate_png = False
+        png_file_name = None
     else:
-        json_file_name = args[2]
         generate_png = True
+        png_file_name = args[3]
 
     try:
         data_to_draw = JsonParser(json_file_name)
@@ -74,7 +76,9 @@ def main():
         except Exception as err:
             print(err)
 
-    print(len(figures))
+    canvas = PyGameCanvas(palette, screen, figures)
+    canvas.run_pygame(generate_png, png_file_name)
+
     print("elo")
     return
 
