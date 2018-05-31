@@ -30,7 +30,10 @@ def validate_command_line_args(parsed_args):
 
 
 def create_figure_obj(figure):
-    figure_type = figure["type"]
+    try:
+        figure_type = figure["type"]
+    except Exception:
+        raise Exception("W pliku json nie podano typu figury. Figura ta nie zostanie narysowana.")
 
     if figure_type == "point":
         return Point(figure)
@@ -79,7 +82,6 @@ def main():
     canvas = PyGameCanvas(palette, screen, figures)
     canvas.run_pygame(generate_png, png_file_name)
 
-    print("elo")
     return
 
 

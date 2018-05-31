@@ -13,7 +13,8 @@ class JsonParser:
             self.screen = json_data["Screen"]
 
         except IOError:
-            raise IOError("Coś poszło nie tak podczas otwierania podanego pliku. Sprawdź czy podana nazwa jest prawidłowa.")
+            raise IOError(
+                "Coś poszło nie tak podczas otwierania podanego pliku. Sprawdź czy podana nazwa jest prawidłowa.")
 
     def get_figures(self):
         return self.figures

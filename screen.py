@@ -1,7 +1,7 @@
 class Screen:
     def __init__(self, json_screen_data):
-        self.width = json_screen_data["width"]
-        self.height = json_screen_data["height"]
+        self.width = int(json_screen_data["width"])
+        self.height = int(json_screen_data["height"])
         self.bg_color = json_screen_data["bg_color"]
         self.fg_color = json_screen_data["fg_color"]
 

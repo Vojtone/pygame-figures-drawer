@@ -2,9 +2,9 @@ class Square:
     def __init__(self, json_square_data):
         try:
             self.color = json_square_data["color"]
-            self.x = json_square_data["x"]
-            self.y = json_square_data["y"]
-            self.size = json_square_data["size"]
+            self.x = int(json_square_data["x"])
+            self.y = int(json_square_data["y"])
+            self.size = int(json_square_data["size"])
         except Exception:
             raise Exception("Nie podano wszystkich wymaganych własności dla kwadratu. Figura nie zostanie narysowana.")
 

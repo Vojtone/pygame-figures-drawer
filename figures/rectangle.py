@@ -2,10 +2,10 @@ class Rectangle:
     def __init__(self, json_rectangle_data):
         try:
             self.color = json_rectangle_data["color"]
-            self.x = json_rectangle_data["x"]
-            self.y = json_rectangle_data["y"]
-            self.width = json_rectangle_data["width"]
-            self.height = json_rectangle_data["height"]
+            self.x = int(json_rectangle_data["x"])
+            self.y = int(json_rectangle_data["y"])
+            self.width = int(json_rectangle_data["width"])
+            self.height = int(json_rectangle_data["height"])
         except Exception:
             raise Exception("Nie podano wszystkich wymaganych własności dla prostokąta. Figura nie zostanie narysowana.")
 
